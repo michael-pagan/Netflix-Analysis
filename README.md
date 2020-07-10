@@ -1,5 +1,6 @@
 # Netflix-Analysis
 DATS 6401 - Final Project - Michael Pagan
+
 [![DOI](https://zenodo.org/badge/278671066.svg)](https://zenodo.org/badge/latestdoi/278671066)
 
 This project aims to visualize the Netflix habits of individuals and families in my social circle.
