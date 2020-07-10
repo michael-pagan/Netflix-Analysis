@@ -1,7 +1,7 @@
 # Netflix-Analysis
 DATS 6401 - Final Project - Michael Pagan
 
-[![DOI](https://zenodo.org/badge/278671066.svg)](https://zenodo.org/badge/latestdoi/278671066)
+[![DOI](https://zenodo.org/badge/278671066.svg)](https://zenodo.org/badge/latestdoi/278671066) 
 
 https://michael-pagan.github.io/Netflix-Analysis/
 
