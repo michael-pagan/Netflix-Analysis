@@ -1,0 +1,100 @@
+/* for all text */
+
+.lead {
+text-align: justify;
+text-justify: inter-word;
+}
+
+/* navigation */ 
+
+.netflix_nav {
+  color: #000 !important;
+  background: #000 !important;
+}
+
+/* header */ 
+.header {
+    background-image: url('../images/netflix.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+#subtitle {
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.description {
+  left: 50%;
+  position: absolute;
+  top: 35%;
+  transform: translate(-50%, -55%);
+  text-align: center;
+}
+
+.description h1 {
+  color: #fff;
+}
+
+.description p {
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+#image_source {
+  text-align: right;
+  float: right;
+  font-size: 11px;
+  color: grey;
+}
+
+/* about */
+
+#image {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#facebook_status {
+  width: 75%;
+  height: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* barchart race */
+
+#replay {
+  margin-top: 20px;
+}
+
+/* tableau workbook sections */ 
+
+#title_analysis {
+  padding-top: 0px;
+}
+
+#time_analysis {
+  padding: 50px 0 50px 0;
+}
+
+#most_watched {
+  margin-top: 0px;
+}
+
+/* tableau workbooks */
+
+#title_analysis div, #most_watched_div, #time_analysis_div {
+  margin-top: 80px;
+}

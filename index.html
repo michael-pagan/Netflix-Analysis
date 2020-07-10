@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="Michael Pagan" content="">
+
+  <title>DATS 6401 - Final Project - Michael Pagan</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+  <!-- My stylesheet -->
+  <link href="css/main.css" rel="stylesheet">
+
+  <!-- Embedded barchart race -->
+  <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@michael-pagan/bar-chart-race/2.js?v=3";
+    const inspect = Inspector.into("#observablehq-6b530fe1");
+    (new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+  </script>
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top netflix_nav" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger netflix_link" href="#motivation_and_data">Motivation and Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger netflix_link" href="#barchartrace">Bar Chart Race</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger netflix_link" href="#time_analysis">Time Analysis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger netflix_link" href="#title_analysis">Title Analysis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger netflix_link" href="#most_watched">Most Watched</a>
+          </li>
+        </ul> <!-- mainNav -->
+      </div> <!-- navbarResponsive -->
+    </div> <!-- container -->
+  </nav> <!-- netflix nav -->
+
+  <header class="bg-primary text-white header">
+    <div class="overlay">
+      <div class="container text-center description">
+        <h1>Visualizing Netflix Habits</h1>
+        <p id="subtitle" class="lead">
+          This project aims to visualize the Netflix habits of individuals and families in my social circle.
+        </p> <!-- lead -->
+      </div> <!-- container text-center description -->
+    </div> <!-- overlay -->
+  </header> <!-- bg-primary text-white header -->
+  <p id="image_source" class="lead nav-link">
+    <a href="https://unsplash.com/photos/11SgH7U6TmI">Image source: Unsplash</a>
+  </p>
+
+  <section id="motivation_and_data">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Motivation and Data</h2>
+          <div class="row" id="image">
+            <img src="images/sad.jpg" class="img-responsive" id="facebook_status" alt="An old Facebook Status"> 
+          </div> <!-- row -->
+          <p class="lead">
+            Media, specifically television, have become a cornerstone to life in the modern world. 
+            Even our language has adapted to accompany this societal shift: marathoning, binge-watching, 
+            and streaming are all commonplace in everyday conversation. And, if you're like me, you've found yourself
+            wondering just how much time you've dedicated to binging your favorite TV shows and movies or simply Netflix and Chill-ing.
+          </p> <!-- lead -->
+          <p class="lead">
+            This project visualizes the Netflix viewing statistics from nine families within my social circle. The data were obtained using 
+            <a href="https://chrome.google.com/webstore/detail/netflix-viewing-stats/bckfpnenhimfckndcceonmkhheinmkob?hl=en">Netflix Viewing Stats</a>, a
+            Google Chrome extension that leverages Netflix's Shakti API (learn more <a href="https://github.com/oldgalileo/shakti)">here</a>) to
+            allow users to get more out of Netflix's Viewing Activity page by creating a dashboard of the signed-in user's viewing statistics. From here,
+            a .csv file can be downloaded to tabulate these data, which were then visualized. The <a href="https://www.kaggle.com/shivamb/netflix-shows">Netflix Movies and TV Shows Kaggle dataset</a>
+            were also used to compare viewing statistics to the Netflix library as of 2019. Data were pre-processed in Microsoft Excel and RStudio; visualized using Tableau and D3.js.
+          </p> <!-- lead -->
+          <p class="lead">
+            For the purpose of this project a "title" refers to anything watched on Netflix. In the dataset captured via the Netflix Viewing Stats extension, a title is only counted once, and the duration 
+            of the title is counted despite the length of the view. Thus, the below results may not be totally representative of the viewer's Netflix habits, but nonetheless provides an interesting insight into 
+            what, how much, and how often they're watching.
+          </p>
+        </div> <!-- col-lg-8 mx-auto -->
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section> <!-- motivation_and_data -->
+
+  <section id="barchartrace">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Bar Chart Race</h2>
+          <p class="lead">
+            First things first: How much time has been spent watching Netflix?
+          </p> <!-- lead -->
+          <p class="lead">
+            This chart animates the time (in hours) that one watched Netflix per year between 2009 - 2020. Color indicates family.
+          </p> <!-- lead -->
+          <div id="barchart_div">
+            <div id="observablehq-6b530fe1"></div> <!-- barchart race -->
+          </div> <!-- barchart_div -->
+          <button onclick="refreshRace()" type="button" class="btn btn-primary" id="replay">Replay</button>
+        </div> <!-- col-lg-8 mx-auto -->
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section> <!-- barchartrace -->
+  
+  <section id="time_analysis" class="bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Time Analysis</h2>
+          <p class="lead" id="first_text">
+            The below workbook investigates the time question further. The data seen in the bar chart race are tabulated in 
+            the left-hand table; total time per person and per family for movies and series are shown in the bar graph.
+          </p> <!-- lead -->
+        </div> <!-- col-lg-8 mx-auto -->
+        <div class='tableauPlaceholder' id='time_analysis_div' style='position: relative'>
+          <noscript>
+            <a href='#'>
+              <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixAnalysis_15942738486050&#47;TimeSpentWatchingNetflix2&#47;1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='NetflixAnalysis_15942738486050&#47;TimeSpentWatchingNetflix2' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='no' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixAnalysis_15942738486050&#47;TimeSpentWatchingNetflix2&#47;1.png' /> 
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en' />
+          </object> <!-- tableauViz -->
+
+          <!-- Time Analysis Tableau Dashboard -->
+          <script type='text/javascript'>                    
+            var divElement = document.getElementById('time_analysis_div');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+            else { vizElement.style.width='100%';vizElement.style.height='700px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+          </script>
+
+          </div> <!-- time_analysis_div -->
+        </div> <!-- time_analysis_div -->           
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section> <!-- time_analysis -->
+
+  <section id="title_analysis">
+    <div class="container">
+      <div class="row"></div>
+        <div class="col-lg-8 mx-auto">
+          <h2>Title Analysis</h2>
+          <p class="lead">
+            Clearly <em>a lot</em> of time is spent watching Netflix. But what exactly is being watched?
+          </p>
+          <p class="lead">
+            The below workbook visualizes the amount of time each viewer has spent watching various genres available on Netflix and the number of titles viewers have watched.
+          </p>
+        </div>
+        <div class='tableauPlaceholder' id='title_analysis_div' style='position: relative'>
+          <noscript>
+            <a href='#'>
+              <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixAnalysis_15942738486050&#47;TitleAnalysis&#47;1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='NetflixAnalysis_15942738486050&#47;TitleAnalysis' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixAnalysis_15942738486050&#47;TitleAnalysis&#47;1.png' /> 
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en' />
+          </object> <!-- tableauViz -->
+
+          <!-- Title Analysis Tableau Dashboard -->
+          <script type='text/javascript'>                    
+            var divElement = document.getElementById('title_analysis_div');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+            else { vizElement.style.width='100%';vizElement.style.height='600px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+          </script>
+
+        </div> <!-- title_analysis_div -->            
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section> <!-- title_analyis -->
+
+  <section id="most_watched" class="bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Most Watched</h2>
+          <p class="lead">
+            Though the title analysis illuminates the diverse interests of the viewers, everyone has a favorite show. In this case, we'll classify this as 
+            the title the viewer has spent the most time watching. The pie chart represents the number of titles the viewers have watched out of the full number
+            of titles in the Netflix library as of 2019.
+          </p>
+        </div> <!-- col-lg-8 mx-auto -->
+        <div class='tableauPlaceholder' id='most_watched_div' style='position: relative'>
+          <noscript>
+            <a href='#'>
+              <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixAnalysis_15942738486050&#47;TitleSpentMostTimeWatching&#47;1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='NetflixAnalysis_15942738486050&#47;TitleSpentMostTimeWatching' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixAnalysis_15942738486050&#47;TitleSpentMostTimeWatching&#47;1.png' /> 
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en' />
+          </object> <!-- tableauViz-->
+
+          <!-- Most Watched Tableau Dashboard -->
+          <script type='text/javascript'> 
+            var divElement = document.getElementById('most_watched_div');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+            else { vizElement.style.width='100%';vizElement.style.height='700px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+          </script>
+
+        </div> <!-- most_watched_div-->    
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section> <!-- most_watched -->
+
+  <section id="roll_credits" class="bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Are you still watching?</h2>
+          <p class="lead">
+            If you've made it this far, odds are you are.
+          </p>
+          <p class="lead">
+
+          </p>
+          <p class="lead">
+            Hope you enjoyed.
+          </p>
+        </div> <!-- col-lg-8 mx-auto -->  
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section> <!-- most_watched -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white"></p>
+      <p class="m-0 text-center text-white">Copyright &copy; Michael Pagan 2020</p>
+      <p class="m-0 text-center text-white"><a href="https://www.linkedin.com/in/michael-r-pagan/>">LinkedIn</a> | <a href="https://github.com/michael-pagan">GitHub</a></p>
+    </div> <!-- container -->
+    <!-- /.container -->
+  </footer> <!-- py-5 bg-dark -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+  <!-- My Custom JavaScript -->
+  <script src="js/main.js"></script>
+
+</body> <!-- page-top -->
+
+</html>
